@@ -28,25 +28,6 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
   });
   console.log(`LiquidityMiningManager deployed at ${liquidityMiningManager.address}`);
 
-  // deploy escrow pool
-  const escrowPool = await deploy("EscrowPool", {
-    contract: "TimeLockNonTransferablePool",
-    from: deployer,
-    args: [
-      "Escrowed Flux Token",
-      "EFLX",
-      FLX,
-      FLX,
-      constants.AddressZero,
-      0,
-      0,
-      0,
-      ONE_YEAR * 10
-    ],
-    deterministicDeployment: false,
-  });
-  console.log(`EscrowPool deployed at ${escrowPool.address}`);
-
   // deploy FLX/USDC UniswapV2 pool
   const flxUsdcPool = await deploy("FLXUSDCPool", {
     contract: "TimeLockNonTransferablePool",
@@ -56,9 +37,9 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
       "SFLXUNILP",
       LP,
       FLX,
-      escrowPool.address,
-      1,
-      ONE_YEAR,
+      constants.AddressZero,
+      0,
+      0,
       1,
       ONE_YEAR
     ],
@@ -72,7 +53,7 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
     from: deployer,
     args: [
       liquidityMiningManager.address,
-      escrowPool.address
+      flxUsdcPool.address
     ],
     deterministicDeployment: false,
   });
