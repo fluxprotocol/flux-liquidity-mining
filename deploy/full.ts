@@ -4,9 +4,9 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { constants, utils } from "ethers";
 import { read } from "fs";
 
-const FLX = "0x23FF74Af1a1e8Ef4433d761943Eb164F927bA2e2"; // ropsten FLX token with faucet
-const LP = "0x615d0222f91d76A680eb99D3C8d3B88E03e5d607"; // same as above
-const multisig = "0xCAa58677fa6a5437B0eDD37659f94DdBEa575945";
+const FLX = "0x3ea8ea4237344c9931214796d9417af1a1180770"; // ropsten FLX token with faucet
+const LP = "0xd6Ef070951d008f1e6426ad9ca1C4FcF7220eE4D"; // uniswap v2 FLX-USDC
+const multisig = "0xCAa58677fa6a5437B0eDD37659f94DdBEa575945"; // TODO: SET ME to deployer 
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
 const deployFunction: DeployFunction = async function ({ ethers, deployments, getNamedAccounts, getChainId }: HardhatRuntimeEnvironment) {
