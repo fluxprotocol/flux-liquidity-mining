@@ -15,7 +15,7 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/setRewardPerSecond");
   require("./tasks/distributeRewards");
   require("./tasks/dripFaucetTokens");
-  require("./tasks/setLMMapproval");
+  require("./tasks/approveERC20");
   require("./tasks/myBalanceOf");
   require("./tasks/deposit");
   require("./tasks/claimRewards");
