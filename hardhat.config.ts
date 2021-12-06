@@ -19,6 +19,8 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/myBalanceOf");
   require("./tasks/deposit");
   require("./tasks/claimRewards");
+  require("./tasks/getDepositsOf");
+  require("./tasks/withdraw");
 }
 
 import { resolve } from "path";
