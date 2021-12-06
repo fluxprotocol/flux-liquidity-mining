@@ -14,6 +14,11 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/fetchData");
   require("./tasks/setRewardPerSecond");
   require("./tasks/distributeRewards");
+  require("./tasks/dripFaucetTokens");
+  require("./tasks/setLMMapproval");
+  require("./tasks/myBalanceOf");
+  require("./tasks/deposit");
+  require("./tasks/claimRewards");
 }
 
 import { resolve } from "path";
