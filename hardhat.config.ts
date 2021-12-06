@@ -12,6 +12,8 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/deploy");
   require("./tasks/balanceOf");
   require("./tasks/fetchData");
+  require("./tasks/setRewardPerSecond");
+  require("./tasks/distributeRewards");
 }
 
 import { resolve } from "path";
