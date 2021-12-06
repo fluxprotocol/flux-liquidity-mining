@@ -10,6 +10,8 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/accounts");
   require("./tasks/clean");
   require("./tasks/deploy");
+  require("./tasks/balanceOf");
+  require("./tasks/fetchData");
 }
 
 import { resolve } from "path";

@@ -11,7 +11,6 @@ contract View {
     struct Data {
         uint256 pendingRewards;
         Pool[] pools;
-        Pool escrowPool;
         uint256 totalWeight;
     }
 
@@ -35,11 +34,9 @@ contract View {
     }
 
     LiquidityMiningManager public immutable liquidityMiningManager;
-    TimeLockPool public immutable escrowPool;
 
-    constructor(address _liquidityMiningManager, address _escrowPool) {
+    constructor(address _liquidityMiningManager) {
         liquidityMiningManager = LiquidityMiningManager(_liquidityMiningManager);
-        escrowPool = TimeLockPool(_escrowPool);
     }
 
     function fetchData(address _account) external view returns (Data memory result) {
@@ -81,32 +78,7 @@ contract View {
                 });
             }
 
-            
         }
-
-        result.escrowPool = Pool({
-            poolAddress: address(escrowPool),
-            totalPoolShares: escrowPool.totalSupply(),
-            depositToken: address(escrowPool.depositToken()),
-            accountPendingRewards: escrowPool.withdrawableRewardsOf(_account),
-            accountClaimedRewards: escrowPool.withdrawnRewardsOf(_account),
-            accountTotalDeposit: escrowPool.getTotalDeposit(_account),
-            accountPoolShares: escrowPool.balanceOf(_account),
-            weight: 0,
-            deposits: new Deposit[](escrowPool.getDepositsOfLength(_account))
-        });
-
-        TimeLockPool.Deposit[] memory deposits = escrowPool.getDepositsOf(_account);
-
-        for(uint256 j = 0; j < result.escrowPool.deposits.length; j ++) {
-            TimeLockPool.Deposit memory deposit = deposits[j];
-            result.escrowPool.deposits[j] = Deposit({
-                amount: deposit.amount,
-                start: deposit.start,
-                end: deposit.end,
-                multiplier: escrowPool.getMultiplier(deposit.end - deposit.start)
-            });
-        } 
 
     }
 

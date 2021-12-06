@@ -4,9 +4,9 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { constants, utils } from "ethers";
 import { read } from "fs";
 
-const FLX = "0x3ea8ea4237344c9931214796d9417af1a1180770"; // ropsten FLX token with faucet
+const FLX = "0x3ea8ea4237344c9931214796d9417af1a1180770"; // mainnet FLX token
 const LP = "0xd6Ef070951d008f1e6426ad9ca1C4FcF7220eE4D"; // uniswap v2 FLX-USDC
-// const multisig = "0xCAa58677fa6a5437B0eDD37659f94DdBEa575945"; // TODO: SET ME to deployer 
+// const multisig = "0xCAa58677fa6a5437B0eDD37659f94DdBEa575945"; 
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
 const deployFunction: DeployFunction = async function ({ ethers, deployments, getNamedAccounts, getChainId }: HardhatRuntimeEnvironment) {
@@ -36,8 +36,8 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
     contract: "TimeLockNonTransferablePool",
     from: deployer,
     args: [
-      "Staked Flux Token Uniswap LP", // name
-      "SFLXUNILP", // symbol
+      "Staked FLX-USDC UniswapV2 LP", // name
+      "SFLXUSDC", // symbol
       LP, // deposit token
       FLX, // rewards token
       constants.AddressZero, // escrow pool
@@ -56,7 +56,6 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
     from: deployer,
     args: [
       liquidityMiningManager.address, // liquidity mining manager
-      constants.AddressZero // escrow pool (none)
     ],
     deterministicDeployment: false,
   });
@@ -64,7 +63,6 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
 
 
   // const liquidityMiningManager = (await get("LiquidityMiningManager"));
-  // const escrowPool = (await get("EscrowPool"));
   // const flxUsdcPool = (await get("FLXUSDCPool"));
   // const view = (await get("View"));
   
@@ -103,7 +101,6 @@ const deployFunction: DeployFunction = async function ({ ethers, deployments, ge
   await execute("LiquidityMiningManager", {from: deployer}, "grantRole", DEFAULT_ADMIN_ROLE, multisig);
   
   console.log("Assigning DEFAULT_ADMIN roles on pools");
-  await execute("EscrowPool", {from: deployer}, "grantRole", DEFAULT_ADMIN_ROLE, multisig);
   await execute("FLXUSDCPool", {from: deployer}, "grantRole", DEFAULT_ADMIN_ROLE, multisig);
 
   console.log('done');
