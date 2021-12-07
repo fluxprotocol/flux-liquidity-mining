@@ -1,4 +1,4 @@
-# Merit Circle Liquidity Mining
+# Flux Liquidity Mining
 
 See docs at 
 
@@ -22,6 +22,14 @@ Compile the smart contracts with Hardhat:
 
 ```sh
 $ yarn compile
+```
+
+### Deploy
+
+Check the deployment script at `deploy/stakingrewards.ts` and deploy:
+
+```sh
+$ npx hardhat deploy --tags StakingRewards --network mainnet
 ```
 
 ### TypeChain
