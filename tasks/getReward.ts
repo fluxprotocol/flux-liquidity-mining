@@ -1,16 +1,15 @@
 import { task } from "hardhat/config";
 import { parseEther } from "ethers/lib/utils";
 
-task("claimRewards")
+task("getReward")
   .setAction(async (taskArgs, { ethers, deployments, getNamedAccounts }) => {
     const { execute } = deployments;
     const { deployer } = await getNamedAccounts();
 
     const txn = await execute(
-        "FLXUSDCPool",
+        "StakingRewards",
         {from: deployer, log: true, gasLimit: 8000000},
-        "claimRewards",
-        deployer
+        "getReward"
     );
 
     console.log(` Transaction hash: ${txn.transactionHash}`);

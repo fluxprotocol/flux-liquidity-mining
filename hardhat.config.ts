@@ -9,7 +9,6 @@ import "hardhat-deploy";
 if(!process.env.COMPILE_ONLY) {
   require("./tasks/accounts");
   require("./tasks/clean");
-  require("./tasks/deploy");
   require("./tasks/balanceOf");
   require("./tasks/fetchData");
   require("./tasks/setRewardPerSecond");
@@ -17,10 +16,12 @@ if(!process.env.COMPILE_ONLY) {
   require("./tasks/dripFaucetTokens");
   require("./tasks/approveERC20");
   require("./tasks/myBalanceOf");
-  require("./tasks/deposit");
-  require("./tasks/claimRewards");
+  require("./tasks/stake");
+  require("./tasks/getReward");
   require("./tasks/getDepositsOf");
   require("./tasks/withdraw");
+  require("./tasks/notifyRewardAmount");
+  require("./tasks/transferERC20");
 }
 
 import { resolve } from "path";

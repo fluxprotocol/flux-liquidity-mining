@@ -956,7 +956,7 @@ contract StakingRewards is ReentrancyGuard, Pausable {
     IERC20 public stakingToken;
     uint256 public periodFinish = 0;
     uint256 public rewardRate = 0;
-    uint256 public rewardsDuration = 7 days;
+    uint256 public rewardsDuration = 365 days;
     uint256 public lastUpdateTime;
     uint256 public rewardPerTokenStored;
 

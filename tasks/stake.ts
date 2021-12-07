@@ -1,7 +1,7 @@
 import { task } from "hardhat/config";
 import { parseEther } from "ethers/lib/utils";
 
-task("withdraw")
+task("stake")
   .addParam("amount")
   .setAction(async (taskArgs, { ethers, deployments, getNamedAccounts }) => {
     const { execute } = deployments;
@@ -10,7 +10,7 @@ task("withdraw")
     const txn = await execute(
         "StakingRewards",
         {from: deployer, log: true, gasLimit: 8000000},
-        "withdraw",
+        "stake",
         parseEther(taskArgs.amount),
     );
 
