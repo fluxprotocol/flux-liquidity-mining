@@ -4,11 +4,24 @@ import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "hardhat-deploy";
 
 if(!process.env.COMPILE_ONLY) {
   require("./tasks/accounts");
   require("./tasks/clean");
-  require("./tasks/deploy");
+  require("./tasks/balanceOf");
+  require("./tasks/fetchData");
+  require("./tasks/setRewardPerSecond");
+  require("./tasks/distributeRewards");
+  require("./tasks/dripFaucetTokens");
+  require("./tasks/approveERC20");
+  require("./tasks/myBalanceOf");
+  require("./tasks/stake");
+  require("./tasks/getReward");
+  require("./tasks/getDepositsOf");
+  require("./tasks/withdraw");
+  require("./tasks/notifyRewardAmount");
+  require("./tasks/transferERC20");
 }
 
 import { resolve } from "path";
@@ -60,6 +73,11 @@ const config: HardhatUserConfig = {
     excludeContracts: [],
     src: "./contracts",
   },
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+  },
   networks: {
     hardhat: {
       accounts: {
@@ -71,6 +89,7 @@ const config: HardhatUserConfig = {
     kovan: getChainConfig("kovan"),
     rinkeby: getChainConfig("rinkeby"),
     ropsten: getChainConfig("ropsten"),
+    mainnet: { gasPrice: 120000000000, ...getChainConfig("mainnet")},
   },
   paths: {
     artifacts: "./artifacts",
@@ -79,7 +98,7 @@ const config: HardhatUserConfig = {
     tests: "./test",
   },
   solidity: {
-    version: "0.8.7",
+    version: "0.6.7",
     settings: {
       metadata: {
         // Not including the metadata hash
