@@ -6,8 +6,15 @@ task("myBalanceOf")
     const { read } = deployments;
     const { deployer } = await getNamedAccounts();
 
+    console.log(`Deployer public key: ${deployer}`);
+
     const balance = await read(taskArgs.token, "balanceOf", deployer);
     const decimals = await read(taskArgs.token, "decimals");
+
+    // get eth balance
+    const ethBalance = await ethers.provider.getBalance(deployer);
+    console.log(`ETH: ${ethBalance.toString()}`);
+
 
     console.log("BigNumber:");
     console.log(balance.toString());

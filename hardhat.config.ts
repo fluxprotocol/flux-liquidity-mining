@@ -59,10 +59,9 @@ function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
 
   if (!mnemonic) {
     return {
-      accounts: [{
-        privateKey: privateKey ?? '',
-        balance: '0',
-      }],
+      accounts: [
+        privateKey ?? '',
+      ],
       chainId: chainIds[network],
       url,
     };
@@ -103,7 +102,7 @@ const config: HardhatUserConfig = {
     kovan: getChainConfig("kovan"),
     rinkeby: getChainConfig("rinkeby"),
     ropsten: getChainConfig("ropsten"),
-    mainnet: { gasPrice: 120000000000, ...getChainConfig("mainnet")},
+    mainnet: getChainConfig("mainnet"),
   },
   paths: {
     artifacts: "./artifacts",
